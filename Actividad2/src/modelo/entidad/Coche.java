@@ -1,16 +1,11 @@
 package modelo.entidad;
 
-import java.io.Serializable;
-
 /**
- * Clase que define los atributos y métodos del objeto coche e implementa
- * Serializable.
+ * Clase que define los atributos y métodos del objeto coche.
  * 
  * @since 25.01.2022
  */
-public class Coche implements Serializable {
-
-	private static final long serialVersionUID = 7379045101357320838L;
+public class Coche {	
 	
 	/**
 	 * Atributos de los objetos coche
