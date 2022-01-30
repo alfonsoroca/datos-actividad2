@@ -10,7 +10,6 @@ import modelo.entidad.Coche;
  * @since 25.01.2022
  *
  */
-
 public interface InterfazDaoCoche {
 
 	/**
@@ -22,23 +21,23 @@ public interface InterfazDaoCoche {
 	public boolean addCoche(Coche c);
 
 	/**
-	 * Método que elimina un Coche por su id de la base de datos
+	 * Método que elimina un Coche por su idCoche de la base de datos
 	 * 
-	 * @param id Se pasa el id del coche por parámetro
+	 * @param idCoche Se pasa el idCoche del coche por parámetro
 	 * @return Devuelve true si todo es correcto o false si ha habido errores
 	 */
-	public boolean deleteCoche(int id);
+	public boolean deleteCoche(int idCoche);
 
 	/**
-	 * Método que obtiene un Coche por su id de la base de datos
+	 * Método que obtiene un Coche por su idCoche de la base de datos
 	 * 
-	 * @param id Se pasa el id del coche por parámetro
-	 * @return Devuelve el Coche con el id solicitado o null si no existe
+	 * @param idCoche Se pasa el idCoche del coche por parámetro
+	 * @return Devuelve el Coche con el idCoche solicitado o null si no existe
 	 */
-	public Coche getCoche(int id);
+	public Coche getCoche(int idCoche);
 
 	/**
-	 * Método que modifica un Coche por su id de la base de datos
+	 * Método que modifica un Coche por su idCoche de la base de datos
 	 * 
 	 * @param c Se pasa un objeto coche por parámetro
 	 * @return Devuelve true si todo es correcto o false si ha habido errores

@@ -12,7 +12,7 @@ import modelo.entidad.Coche;
 import modelo.persistencia.interfaz.InterfazDaoCoche;
 
 /**
- * Clase que implementa los métodos que definirán el CRUD de la base de datos
+ * Clase que implementa los métodos que definirán el CRUD de la tabla Coches
  * 
  * @since 25.01.2022
  */
@@ -34,7 +34,8 @@ public class DaoCocheMySQL implements InterfazDaoCoche {
 		try {
 			conexion = DriverManager.getConnection(url, usuario, password);
 		} catch (SQLException e) {
-			e.printStackTrace();			
+			e.printStackTrace();
+			System.out.println("No se ha podido conectar con la base de datos.");
 			return false;
 		}
 		return true;
@@ -88,7 +89,7 @@ public class DaoCocheMySQL implements InterfazDaoCoche {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("addCoche-> Error al insertar: " + c);
+			System.out.println("	addCoche-> Error al insertar el " + c);
 			addCoche = false;
 			e.printStackTrace();
 
@@ -101,7 +102,7 @@ public class DaoCocheMySQL implements InterfazDaoCoche {
 	}
 
 	@Override
-	public boolean deleteCoche(int id) {
+	public boolean deleteCoche(int idCoche) {
 
 		// Comprobamos el estado de la conexión a la base de datos
 		if (!openConnection()) {
@@ -117,7 +118,7 @@ public class DaoCocheMySQL implements InterfazDaoCoche {
 		try {
 			// Preparamos la sentencia de la query con los parámetros
 			PreparedStatement ps = conexion.prepareStatement(query);
-			ps.setInt(1, id);
+			ps.setInt(1, idCoche);
 
 			// Ejecutamos la query
 			int registros = ps.executeUpdate();
@@ -128,7 +129,7 @@ public class DaoCocheMySQL implements InterfazDaoCoche {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("deleteCoche-> Error al eliminar el coche con id: " + id);
+			System.out.println("	deleteCoche-> Error al eliminar el coche con id: " + idCoche);
 			deleteCoche = false;
 			e.printStackTrace();
 
@@ -141,7 +142,7 @@ public class DaoCocheMySQL implements InterfazDaoCoche {
 	}
 
 	@Override
-	public Coche getCoche(int id) {
+	public Coche getCoche(int idCoche) {
 
 		// Comprobamos el estado de la conexión a la base de datos
 		if (!openConnection()) {
@@ -152,12 +153,12 @@ public class DaoCocheMySQL implements InterfazDaoCoche {
 		Coche coche = null;
 
 		// Establecemos la query a realizar
-		String query = "SELECT ID, MATRICULA, MARCA, MODELO COLOR FROM COCHES WHERE ID=?;";
+		String query = "SELECT ID, MATRICULA, MARCA, MODELO, COLOR FROM COCHES WHERE ID=?;";
 
 		try {
 			// Preparamos la sentencia de la query con los parámetros
 			PreparedStatement ps = conexion.prepareStatement(query);
-			ps.setInt(1, id);
+			ps.setInt(1, idCoche);
 
 			// Almacenamos el resultado de la query
 			ResultSet rs = ps.executeQuery();
@@ -165,7 +166,7 @@ public class DaoCocheMySQL implements InterfazDaoCoche {
 			// Con un while() obtenemos el resultado de la select y creamos un coche
 			while (rs.next()) {
 				coche = new Coche();
-				coche.setId(rs.getInt(1));
+				coche.setIdCoche(rs.getInt(1));
 				coche.setMatricula(rs.getString(2));
 				coche.setMarca(rs.getString(3));
 				coche.setModelo(rs.getString(4));
@@ -173,7 +174,7 @@ public class DaoCocheMySQL implements InterfazDaoCoche {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("getCoche-> Error al obtener el coche con id: " + id);
+			System.out.println("	getCoche-> Error al obtener el coche con id: " + idCoche);
 			e.printStackTrace();
 
 		} finally {
@@ -205,7 +206,7 @@ public class DaoCocheMySQL implements InterfazDaoCoche {
 			ps.setString(2, c.getMarca());
 			ps.setString(3, c.getModelo());
 			ps.setString(4, c.getColor());
-			ps.setInt(5, c.getId());
+			ps.setInt(5, c.getIdCoche());
 
 			// Ejecutamos la query
 			int registros = ps.executeUpdate();
@@ -217,7 +218,7 @@ public class DaoCocheMySQL implements InterfazDaoCoche {
 
 		} catch (SQLException e) {
 			updateCoche = false;
-			System.out.println("updateCoche-> Error al actualizar el " + c);
+			System.out.println("	updateCoche-> Error al actualizar el " + c);
 			e.printStackTrace();
 
 		} finally {
@@ -253,7 +254,7 @@ public class DaoCocheMySQL implements InterfazDaoCoche {
 			// añadimos a la listaCoches
 			while (rs.next()) {
 				Coche coche = new Coche();
-				coche.setId(rs.getInt(1));
+				coche.setIdCoche(rs.getInt(1));
 				coche.setMatricula(rs.getString(2));
 				coche.setMarca(rs.getString(3));
 				coche.setModelo(rs.getString(4));
@@ -264,7 +265,7 @@ public class DaoCocheMySQL implements InterfazDaoCoche {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("list-> Error al obtener la lista de coches.");
+			System.out.println("	list-> Error al obtener la lista de coches.");
 			e.printStackTrace();
 		} finally {
 			// Cerramos la conexion a la base de datos

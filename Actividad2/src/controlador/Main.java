@@ -15,7 +15,10 @@ public class Main {
 
 		System.out.println("Iniciando aplicación....");
 
-		// Asignación del DaoCocheMySQL al menu
-		new Menu(dc);
+		// Antes de lanzar el menu comprobamos que existe conexión con la base de datos
+		if (dc.openConnection()) {
+			// Asignación del DaoCocheMySQL al menu
+			new MenuCoche(dc);
+		}
 	}
 }
