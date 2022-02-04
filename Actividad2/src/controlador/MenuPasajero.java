@@ -145,7 +145,7 @@ public class MenuPasajero {
 
 				System.out.println("Vas a quitar un pasajero de un coche...");
 				System.out.println("Los pasajeros / coches son los siguientes:");
-				dp.cochesPasajeros();
+				dp.pasajerosCoches(dc);
 				
 				System.out.println("Introduce el id del pasajero que quieres quitar....");
 				idPasajero = Integer.parseInt(sc.nextLine());

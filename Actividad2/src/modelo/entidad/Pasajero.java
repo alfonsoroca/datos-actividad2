@@ -21,7 +21,7 @@ public class Pasajero {
 	 * @param id     Identificador único del pasajero.
 	 * @param nombre Nombre del pasajero.
 	 * @param edad   Edad del pasajero.
-	 * @param peso   Peso del pasajero. *
+	 * @param peso   Peso del pasajero.
 	 */
 	public Pasajero(int id, String nombre, int edad, double peso) {
 		super();

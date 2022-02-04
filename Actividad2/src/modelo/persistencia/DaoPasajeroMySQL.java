@@ -20,7 +20,8 @@ public class DaoPasajeroMySQL implements InterfazDaoPasajero {
 
 	private Connection conexion;
 
-// Definimos dos métodos que se encargan de gestionar la conexión y reportar su estado correcto (true) / erroneo (false)
+// Definimos dos métodos que se encargan de gestionar la conexión y reportar su estado
+// correcto (true) / erroneo (false)
 
 	/**
 	 * Método que abre la conexión con la base de datos
@@ -352,7 +353,7 @@ public class DaoPasajeroMySQL implements InterfazDaoPasajero {
 	}
 
 	@Override
-	public void cochesPasajeros() {
+	public void pasajerosCoches(DaoCocheMySQL dc) {
 
 		// Comprobamos el estado de la conexión a la base de datos
 		if (openConnection()) {
@@ -370,11 +371,11 @@ public class DaoPasajeroMySQL implements InterfazDaoPasajero {
 				// Con un while() obtenemos el resultado de la select e imprimimos el resultado
 				// por consola
 				while (rs.next()) {
-					System.out.println("	Pasajero: " + rs.getInt(2) + " / Coche: " + rs.getInt(1));
+					System.out.println("	" + this.getPasajero(rs.getInt(2)) + " / " + dc.getCoche(rs.getInt(1)));
 				}
-				
+
 			} catch (SQLException e) {
-				System.out.println("	cochesPasajeros-> Error al obtener el listado de Coches / Pasajeros.");
+				System.out.println("	pasajerosCoches-> Error al obtener el listado de Pasajeros / Coches.");
 				e.printStackTrace();
 			} finally {
 				// Cerramos la conexion a la base de datos

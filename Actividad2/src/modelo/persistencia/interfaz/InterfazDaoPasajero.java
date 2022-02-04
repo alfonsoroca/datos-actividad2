@@ -6,6 +6,7 @@ package modelo.persistencia.interfaz;
 import java.util.List;
 
 import modelo.entidad.Pasajero;
+import modelo.persistencia.DaoCocheMySQL;
 
 /**
  * Interfaz que recoge los métodos CRUD de la entidad Pasajero
@@ -73,9 +74,11 @@ public interface InterfazDaoPasajero {
 	 *         ningún Pasajero asociado al Coche
 	 */
 	public List<Pasajero> listPasajerosCoche(int idCoche);
-	
+
 	/**
-	 * Método que imprime por pantalla la relación de Coches / Pasajeros
+	 * Método que imprime por pantalla la relación de Pasajeros / Coches
+	 * 
+	 * @param dc Se pasa un objeto DaoCocheMySQL
 	 */
-	public void cochesPasajeros();
+	public void pasajerosCoches(DaoCocheMySQL dc);
 }

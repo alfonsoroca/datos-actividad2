@@ -23,7 +23,7 @@ public class MenuCoche {
 
 			// Opciones que puede seleccionar el usuario
 			System.out.println("\n***************************************");
-			System.out.println("---------Almacén concesionario---------");
+			System.out.println("---------Almacén de coches---------");
 			System.out.println("***************************************");
 			System.out.println("	1. Añadir nuevo coche");
 			System.out.println("	2. Borrar coche por id");
@@ -114,6 +114,7 @@ public class MenuCoche {
 					coche.setModelo(sc.nextLine());
 					System.out.println("Introduce el nuevo color del coche...");
 					coche.setColor(sc.nextLine());
+					// Ejecutamos la operación y mostramos su resultado
 					dc.updateCoche(coche);
 					System.out.println("Se han actualizado los datos del coche con id " + idCoche);
 				} else {
